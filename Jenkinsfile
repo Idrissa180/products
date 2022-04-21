@@ -5,7 +5,7 @@ node{
     }
 
     stage("Build Docker Image"){
-        sh "docker build -t enoch180/clientui:1.0 ."
+        sh "docker build -t enoch180/produits:1.0 ."
     }
     
 }
