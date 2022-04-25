@@ -1,0 +1,37 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: produits-app
+  namespace: default
+  labels:
+    app: produits-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: produits-app
+  template:
+    metadata:
+      labels:
+        app: produits-app
+    spec:
+      containers:
+      - name: produits-app
+        image: "enoch180/products:1.0"
+        ports:
+          - containerPort: 4002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: produits-app
+  namespace: default
+spec:
+  selector:
+    app: produits-app
+  type: LoadBalancer
+  ports:
+  - name: http
+    targetPort: 4002
+    port: 82
